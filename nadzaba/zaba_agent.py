@@ -49,6 +49,8 @@ class zaba_agent:
         #rozpoznajemy akcje
         noEvent = 1
         print("Zarejestrowano zdarzenie " + str(noEvent) + "\n" + str(self.chances[noEvent]))
+        if(noEvent > len(self.chances)-1):
+            return env.action_space.sample()
         #kumulowanie prawdopodobienstwa
         skumulowane = self.chances.copy() #pamietaj domyslnie kopiuje sie ;) wskazniki
         for i in range(0, len(skumulowane[noEvent]) - 1): #dla kazdego kierunku
