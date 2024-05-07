@@ -3,6 +3,7 @@ import random
 class zaba_agent:
     def __init__( #inicjalizacja
         self,
+        seed, #seed do stworzenia rng
         #opcjonalnie listy prawdopodobienstw dla konkretnych przypadkow
         # a b c
         #1
@@ -35,6 +36,10 @@ class zaba_agent:
                      d:= random.uniform(0.0, 1-a-b-c), 1-a-b-c-d]
         ]
     ):
+        random.seed(seed) #to powinno byc uzyte w zabcia = zaba_agent.zaba_agent(seed=seed) ?
+        # w seedzie mozemy przechowywac ruchy danej żaby
+
+
         self.chances = chances
 
         self.pozycjax = 8
@@ -43,7 +48,7 @@ class zaba_agent:
         self.fitness = 0 #wynik inicjowany 0
         pass
 
-    def pobierz_akcje(self, obserwacja): #co robimy + informacje ze srodowiska
+    def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska
         #self.fitness jest rowny pozycji y
         self.fitness = self.pozycjay
         #rozpoznajemy akcje
@@ -69,4 +74,12 @@ class zaba_agent:
 
 
         return 3 #jakas akcja z najwiekszym prawdopodobienstwem
+    
 
+# algorytm genetyczny:
+# fitness - pozycja y 
+# selection of the fittest frogs - wybrac te z najwiekszym punktem fitness
+# wariacje - zrobic crossover ich genów
+
+# TODO
+# !analiza obrazu!, seedy
