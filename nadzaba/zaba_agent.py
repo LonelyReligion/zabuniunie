@@ -3,7 +3,7 @@ import random
 class zaba_agent:
     def __init__( #inicjalizacja
         self,
-        seed, #seed do stworzenia rng
+        #seed, #seed do stworzenia rng
         #opcjonalnie listy prawdopodobienstw dla konkretnych przypadkow
         # a b c
         #1
@@ -36,9 +36,8 @@ class zaba_agent:
                      d:= random.uniform(0.0, 1-a-b-c), 1-a-b-c-d]
         ]
     ):
-        random.seed(seed) #to powinno byc uzyte w zabcia = zaba_agent.zaba_agent(seed=seed) ?
+        #random.seed(seed) #to powinno byc uzyte w zabcia = zaba_agent.zaba_agent(seed=seed) ?
         # w seedzie mozemy przechowywac ruchy danej żaby
-
 
         self.chances = chances
 
@@ -46,6 +45,7 @@ class zaba_agent:
         self.pozycjay = 0
 
         self.fitness = 0 #wynik inicjowany 0
+        
         pass
 
     def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska
@@ -70,6 +70,8 @@ class zaba_agent:
         for i in range(0, len(skumulowane[noEvent]) - 1): #dla kazdego kierunku
             if(wylosowana_wartosc <= skumulowane[noEvent][i]):
                 print("Wylosowano akcje " + str(i))
+                #jezeli akcja to pojscie w gore to wynik++
+                #jezeli w dol to pojscie w dol
                 return i
 
 

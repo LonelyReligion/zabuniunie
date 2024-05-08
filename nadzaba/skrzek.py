@@ -2,18 +2,29 @@ import gymnasium as gym
 import numpy #moze do generowania seeda?
 import zaba_agent
 
-def capture_screen(env):
-    screen = env.render()
+def znajdz_zabe(obs):  #optymalizacja: w pixel_x i pixel_y mamy przednia lewa lapke!!!
+    #idziemy od dołu?
+    pixel_x = 0;
+    pixel_y = 0;
+    zaba_znaleziona = False;
 
-    #screen_array = jakiś sposób na użycie tego obrazu
-    #do stworzenia array z obrazu (może z pomocą numpy)
+    for linijka in obs:
+        pixel_x = 0;
+        for pixel in linijka:
+            if((pixel==[110, 156, 66]).all()):
+                print("Mamy fragment żaby! Yippee" + " " + str(pixel_x));
+                zaba_znaleziona = True;
+                return [pixel_x, pixel_y]
+            pixel_x+=1;
+        pixel_y+=1;
+    
+#def popatrz()
 
 def run():
     env = gym.make("ALE/Frogger-v5", render_mode="human", obs_type="rgb")
     #render_module: human, rgb_array, ansi, rgb_array_list, ansi_list 
     print(env.observation_space)
-    state = env.reset()
-    print(state)
+    obs, info = env.reset()
     terminated = False
     truncated = False
     # kolor ramki: [82, 126, 45]
@@ -28,16 +39,15 @@ def run():
     i = 0
     zabcia = zaba_agent.zaba_agent()
     while(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
-        capture_screen(env)
         i+=1
+        znajdz_zabe(obs);
         if i % 6 <= 3:
-            action = zabcia.pobierz_akcje(env ,state[0])
+            action = zabcia.pobierz_akcje(env, obs)
         else:
             #konieczne, poniewaz symulujemy przyciski - jesli akcja sie powtorzy zostanie wykonanana tylko raz 
             #mogloby to zaburzyc proces uczenia sie imo
             action = 0
-        new_state, reward, terminated, truncated, _ = env.step(action)
-        state = new_state
+        obs, reward, terminated, truncated, info = env.step(action)
  
 
     env.close()
