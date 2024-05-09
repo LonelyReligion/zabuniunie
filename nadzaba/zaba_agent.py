@@ -50,13 +50,12 @@ class zaba_agent:
         self.fitness = self.pozycjay
         #rozpoznajemy akcje
         noEvent = obserwacja
-        print("Zarejestrowano zdarzenie " + str(noEvent) + "\n" + str(self.Chances[noEvent]))
+        print("Zarejestrowano zdarzenie " + str(noEvent))
         if(noEvent > len(self.Chances)-1):
             return env.action_space.sample()
         #kumulowanie prawdopodobienstwa
         skumulowane = deepcopy(self.Chances) #pamietaj domyslnie kopiuje sie ;) wskazniki
         for i in range(0, len(skumulowane[noEvent])): #dla kazdego kierunku
-            #skumulowane[i] = self.Chances[i].copy()
             if(i == 0):
                 pass
             else:

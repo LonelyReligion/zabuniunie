@@ -16,7 +16,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                     print("Auto od góry, z lewej!");
                     return 0;  
     #lewo
-    for linijka in range(pixel_y, pixel_y + 7): #wysokosc zaby
+    for linijka in range(pixel_y, pixel_y+7): #wysokosc zaby
         for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]==[164, 89, 208]).all() or
@@ -33,7 +33,7 @@ def szukajaut(obs, pixel_x, pixel_y):
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]==[164, 89, 208]).all() or
                (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[82, 126, 45]).all() and pixel_x > 79 or
                (obs[linijka][pixel]==[195, 144, 61]).all() or
                (obs[linijka][pixel]==[236,136,136]).all()
                 ):
@@ -57,7 +57,7 @@ def szukajaut(obs, pixel_x, pixel_y):
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]==[164, 89, 208]).all() or
                (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[82, 126, 45]).all() and pixel_x > 79 or
                (obs[linijka][pixel]==[195, 144, 61]).all() or
                (obs[linijka][pixel]==[236,136,136]).all()
                 ):
@@ -93,11 +93,11 @@ def szukajaut(obs, pixel_x, pixel_y):
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]==[164, 89, 208]).all() or
                (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[82, 126, 45]).all() and pixel_x > 79 or
                (obs[linijka][pixel]==[195, 144, 61]).all() or
                (obs[linijka][pixel]==[236,136,136]).all()
                 ):
-                    print("Auto od góry!");
+                    print("Auto z dołu prawej!");
                     return 7;  
     
     return 5;
@@ -115,8 +115,6 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
                 return [pixel_x, pixel_y];
             pixel_x+=1;
         pixel_y+=1;
-    
-#def popatrz()
 
 def run():
     env = gym.make("ALE/Frogger-v5", render_mode="human", obs_type="rgb")
