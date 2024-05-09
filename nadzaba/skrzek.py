@@ -2,19 +2,117 @@ import gymnasium as gym
 import numpy #moze do generowania seeda?
 import zaba_agent
 
-def znajdz_zabe(obs):  #optymalizacja: w pixel_x i pixel_y mamy przednia lewa lapke!!!
+def szukajaut(obs, pixel_x, pixel_y):
+    #góra lewo
+    for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+        for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto od góry, z lewej!");
+                    return 0;  
+    #lewo
+    for linijka in range(pixel_y, pixel_y + 7): #wysokosc zaby
+        for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto z lewej!");
+                    return 1;
+    #dół lewo
+    for linijka in range(pixel_y+7, pixel_y+14): #wysokosc zaby
+        for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto od dołu, z lewej!!");
+                    return 2;  
+    #góra
+    for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto od góry!");
+                    return 3;  
+    #dół
+    for linijka in range(pixel_y+7, pixel_y+14): #wysokosc zaby
+        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto od dołu!");
+                    return 4;  
+    #góra prawo
+    for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+        for pixel in range(pixel_x+7, pixel_x+14): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto od góry prawo!");
+                    return 5;  
+    #prawo
+    for linijka in range(pixel_y, pixel_y+7): #wysokosc zaby
+        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto z prawej!");
+                    return 6;  
+    #prawo dół
+    for linijka in range(pixel_y+7, pixel_y+14): #wysokosc zaby
+        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
+            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+            if((obs[linijka][pixel]==[164, 89, 208]).all() or
+               (obs[linijka][pixel]==[198, 89, 179]).all() or
+               (obs[linijka][pixel]==[82, 126, 45]).all()  or
+               (obs[linijka][pixel]==[195, 144, 61]).all() or
+               (obs[linijka][pixel]==[236,136,136]).all()
+                ):
+                    print("Auto od góry!");
+                    return 7;  
+    
+    return 5;
+
+def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia lewa lapke!!!
     #idziemy od dołu?
     pixel_x = 0;
     pixel_y = 0;
-    zaba_znaleziona = False;
 
     for linijka in obs:
         pixel_x = 0;
         for pixel in linijka:
             if((pixel==[110, 156, 66]).all()):
-                print("Mamy fragment żaby! Yippee" + " " + str(pixel_x));
-                zaba_znaleziona = True;
-                return [pixel_x, pixel_y]
+                zaba.pozycjay = pixel_y;
+                return [pixel_x, pixel_y];
             pixel_x+=1;
         pixel_y+=1;
     
@@ -40,9 +138,9 @@ def run():
     zabcia = zaba_agent.zaba_agent()
     while(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
         i+=1
-        znajdz_zabe(obs);
         if i % 6 <= 3:
-            action = zabcia.pobierz_akcje(env, obs)
+            zaba_x, zaba_y = znajdz_zabe(obs, zabcia);
+            action = zabcia.pobierz_akcje(env, szukajaut(obs, zaba_x, zaba_y));
         else:
             #konieczne, poniewaz symulujemy przyciski - jesli akcja sie powtorzy zostanie wykonanana tylko raz 
             #mogloby to zaburzyc proces uczenia sie imo
