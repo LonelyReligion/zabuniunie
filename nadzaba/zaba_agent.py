@@ -70,10 +70,3 @@ class zaba_agent:
         return 3;
     
 
-# algorytm genetyczny:
-# fitness - pozycja y 
-# selection of the fittest frogs - wybrac te z najwiekszym punktem fitness
-# wariacje - zrobic crossover ich genów
-
-# TODO
-# !analiza obrazu!, seedy
