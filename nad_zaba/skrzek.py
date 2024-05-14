@@ -100,7 +100,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                     print("Auto z dołu prawej!");
                     return 7;  
     
-    return 5;
+    return 5; #do poprawy, tu byłaby akcja reprezentująca brak auta
 
 def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia lewa lapke!!!
     #idziemy od dołu?

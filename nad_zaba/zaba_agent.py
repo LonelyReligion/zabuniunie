@@ -70,3 +70,20 @@ class zaba_agent:
         return 3;
     
 
+<<<<<<< Updated upstream:nad_zaba/zaba_agent.py
+=======
+# algorytm genetyczny:
+# fitness - pozycja y 
+# selection of the fittest frogs - wybrac te z najwiekszym punktem fitness
+# wariacje - zrobic crossover ich genów
+
+# TODO
+# seed
+
+
+# propozycja: selekcja, krzyżowanie, mutacja
+# wybieramy top 10 żab na 100
+# mnozymy kazda z kazda - ich wartosci w tablicach to srednie 
+# 10% (ustalić eksperymentalnie) szansy na dodanie losowej wartość z zakresu od 0.05 do 0.1(ustalić eksperymentalnie)
+# normalizacja wartości
+>>>>>>> Stashed changes:nadzaba/zaba_agent.py
