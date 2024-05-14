@@ -5,7 +5,7 @@ class zaba_agent:
     def __init__( #inicjalizacja
         self,
         #seed, #seed do stworzenia rng
-        #opcjonalnie listy prawdopodobienstw dla konkretnych przypadkow
+        #opcjonalnie listy prawdopodobienstw dla konkretnych przypadkow SAMOCHODÓW, dla innych typów będą kolejne listy list
         # a b c
         #1
         #2  X
@@ -70,8 +70,6 @@ class zaba_agent:
         return 3;
     
 
-<<<<<<< Updated upstream:nad_zaba/zaba_agent.py
-=======
 # algorytm genetyczny:
 # fitness - pozycja y 
 # selection of the fittest frogs - wybrac te z najwiekszym punktem fitness
@@ -86,4 +84,3 @@ class zaba_agent:
 # mnozymy kazda z kazda - ich wartosci w tablicach to srednie 
 # 10% (ustalić eksperymentalnie) szansy na dodanie losowej wartość z zakresu od 0.05 do 0.1(ustalić eksperymentalnie)
 # normalizacja wartości
->>>>>>> Stashed changes:nadzaba/zaba_agent.py

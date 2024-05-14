@@ -6,10 +6,12 @@ import tensorflow as tf #import do sieci neuronowej
 class siec:
     def __init__(self, dane_wejsciowe, dane_wyjsciowe):
         self.model = tf.keras.Sequential([
-            tf.keras.layers.InputLayer(input_shape=dane_wejsciowe),
+            #czy to dobry kształt? 
+            tf.keras.layers.InputLayer(input_shape=(160, 3), dtype='uint8'),
             tf.keras.layers.Flatten(), #spłaszczanie danych wejsciowych???
-            tf.keras.layers.Dense(128, activation='relu'), #ilosc neuronow
-            tf.keras.layers.Dense(64, activation='relu'), #ilosc neuronow
+            tf.keras.layers.Dense(145, activation='relu'), #The number of hidden neurons should be 2/3 the size of the input layer, plus the size of the output layer?
+            #tf.keras.layers.Dense(128, activation='relu'), #ilosc neuronow 
+            #tf.keras.layers.Dense(64, activation='relu'), #ilosc neuronow
             tf.keras.layers.Dense(dane_wyjsciowe, activation='softmax') #warstwa wyjsciowa (zwraca prawdopodobienstwo)
         ])
         self.model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
@@ -19,4 +21,6 @@ class siec:
         self.model.fit(x_train, y_train, epochs=epochs)
 
     def predict(self, observation): #obserwation - obserwacja aktualnego stanu gry
-        return tf.argmax(self.model.predict(observation), axis=1).numpy() #zwraca indeks akcji najwyzszym prawdopodobienstwem
+        return tf.argmax(self.model.predict(observation), axis=1).numpy()[1] # powinna zwracac indeks akcji najwyzszym prawdopodobienstwem
+    #czemu tf.argmax(self.model.predict(observation), axis=1).numpy() zwraca liste 210 wartosci?
+    

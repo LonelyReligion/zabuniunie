@@ -21,6 +21,7 @@ def run():
     i = 0
 
     siec = zaba.siec(dane_wejsciowe=obs.shape, dane_wyjsciowe = 5) #5 (od 0) to liczba akcji jakie moze wykonać zaba
+    #siec = zaba.siec(dane_wejsciowe=(None, 32, 160, 3), dane_wyjsciowe = 5)
 
     #trzeba jakoś ten model wytrenować
     #jakimi danymi? - zapytac prowadzacego 
