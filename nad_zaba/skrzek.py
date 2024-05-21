@@ -3,104 +3,143 @@ import numpy #moze do generowania seeda?
 import zaba_agent
 
 def szukajaut(obs, pixel_x, pixel_y):
-    #góra lewo
-    for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
-        for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
+    # a b c d e f g 
+    #1[][][][][][][]
+    #2[][][][][][][]
+    #3      X
+    a1 = b1 = c1 = d1 = e1 = f1 = g1 = a2 = b2 = c2 = d2 = e2 = f2 = g2 = 0;
+    
+    slepota = 1
+    if(pixel_y==161 or pixel_y==122):
+        slepota=0
+    
+    if(slepota):
+        #góra góra lewo lewo lewo
+        for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
+            for pixel in range(pixel_x-21, pixel_x-14): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry góry, z lewej lewej lewej!");
+                        a1 = 1; 
+        
+        #góra góra lewo lewo
+        for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
+            for pixel in range(pixel_x-14, pixel_x-7): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry góry, z lewej lewej!");
+                        b1 = 1; 
+        
+        #góra góra lewo
+        for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
+            for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry góry, z lewej!");
+                        c1 = 1; 
+        #góra prawo
+        for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+            for pixel in range(pixel_x+7, pixel_x+14): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry prawo!");
+                        e2 = 1;   
+        
+        #góra prawo prawo
+        for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+            for pixel in range(pixel_x+14, pixel_x+21): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry prawo prawo!");
+                        f2 = 1;  
+        
+        #góra prawo prawo prawo
+        for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+            for pixel in range(pixel_x+21, pixel_x+28): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry prawo prawo prawo!");
+                        g2 = 1; 
+    else:
+         #góra lewo lewo lewo
+        for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+            for pixel in range(pixel_x-21, pixel_x-14): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry, z lewej lewej lewej!");
+                        a2 = 1; 
+        
+        #góra lewo lewo
+        for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+            for pixel in range(pixel_x-14, pixel_x-7): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry, z lewej lewej!");
+                        b2 = 1; 
+        
+        #góra lewo
+        for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
+            for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry, z lewej!");
+                        c2 = 1;  
+        #góra góra prawo
+        for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
+            for pixel in range(pixel_x+7, pixel_x+14): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry góry prawo!");
+                        e1 = 1;   
+        
+        #góra góra prawo prawo
+        for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
+            for pixel in range(pixel_x+14, pixel_x+21): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry góry prawo prawo!");
+                        f1 = 1;  
+        
+        #góra góra prawo prawo prawo
+        for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
+            for pixel in range(pixel_x+21, pixel_x+28): #szerokosc zaby
+                #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
+                if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+                (obs[linijka][pixel]!=[232, 233,74]).all()):
+                        print("Auto od góry góry prawo prawo prawo!");
+                        g1 = 1;
+    
+    #sprawdzenie dla wszystkich
+    #góra góra
+    for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
+        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
-                    print("Auto od góry, z lewej!");
-                    return 0;  
-    #lewo
-    for linijka in range(pixel_y, pixel_y+7): #wysokosc zaby
-        for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
-            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
-                    print("Auto z lewej!");
-                    return 1;
-    #dół lewo
-    for linijka in range(pixel_y+7, pixel_y+14): #wysokosc zaby
-        for pixel in range(pixel_x-7, pixel_x): #szerokosc zaby
-            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all() and pixel_x > 79 or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
-                    print("Auto od dołu, z lewej!!");
-                    return 2;  
+            if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+               (obs[linijka][pixel]!=[232, 233,74]).all()):
+                    print("Auto od góry góry!");
+                    d1 = 1;   
+     
     #góra
     for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
         for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
+            if((obs[linijka][pixel]!=[0, 0, 0]).all() and
+               (obs[linijka][pixel]!=[232, 233,74]).all()):
                     print("Auto od góry!");
-                    return 3;  
-    #dół
-    for linijka in range(pixel_y+7, pixel_y+14): #wysokosc zaby
-        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
-            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all() and pixel_x > 79 or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
-                    print("Auto od dołu!");
-                    return 4;  
-    #góra prawo
-    for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
-        for pixel in range(pixel_x+7, pixel_x+14): #szerokosc zaby
-            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
-                    print("Auto od góry prawo!");
-                    return 5;  
-    #prawo
-    for linijka in range(pixel_y, pixel_y+7): #wysokosc zaby
-        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
-            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all()  or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
-                    print("Auto z prawej!");
-                    return 6;  
-    #prawo dół
-    for linijka in range(pixel_y+7, pixel_y+14): #wysokosc zaby
-        for pixel in range(pixel_x, pixel_x+7): #szerokosc zaby
-            #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
-            if((obs[linijka][pixel]==[164, 89, 208]).all() or
-               (obs[linijka][pixel]==[198, 89, 179]).all() or
-               (obs[linijka][pixel]==[82, 126, 45]).all() and pixel_x > 79 or
-               (obs[linijka][pixel]==[195, 144, 61]).all() or
-               (obs[linijka][pixel]==[236,136,136]).all()
-                ):
-                    print("Auto z dołu prawej!");
-                    return 7;  
+                    d2 = 1;   
     
-    return 5; #do poprawy, tu byłaby akcja reprezentująca brak auta
+    return [a1, b1, c1, d1, e1, f1, g1, a2, b2, c2, d2, e2, f2, g2]; 
 
 def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia lewa lapke!!!
     #idziemy od dołu?
