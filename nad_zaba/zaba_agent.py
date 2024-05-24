@@ -1,4 +1,4 @@
-from copy import deepcopy
+#from copy import deepcopy
 import numpy as np
 
 class zaba_agent:
@@ -18,8 +18,22 @@ class zaba_agent:
         self.Chances = Chances #konwencja, const
         self.pozycjay = 0 #fitness
 
+    def mozg_zaby(self, lista_aut):
+        glosy_za = 0
+        glosy_przeciw = 0
+        for i in lista_aut:
+            if(lista_aut[i]==1):
+                glosy_za += self.Chances[i*2-1]
+                glosy_przeciw += self.Chances[i*2]
+        if(glosy_za>glosy_przeciw):
+            return 1
+        else:
+            return 0        
+
     def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska
-        return 1;
+        krok = self.mozg_zaby(self, obserwacja)
+
+        return krok;
     
 
 # algorytm genetyczny:
