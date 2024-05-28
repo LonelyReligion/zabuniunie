@@ -2,6 +2,8 @@ import gymnasium as gym
 import numpy #moze do generowania seeda?
 import zaba_agent
 
+DEBUG = False
+
 def szukajaut(obs, pixel_x, pixel_y):
     # a b c d e f g 
     #1[][][][][][][]
@@ -20,7 +22,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry góry, z lewej lewej lewej!");
+                        if(DEBUG): print("Auto od góry góry, z lewej lewej lewej!");
                         a1 = 1; 
         
         #góra góra lewo lewo
@@ -29,7 +31,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry góry, z lewej lewej!");
+                        if(DEBUG): print("Auto od góry góry, z lewej lewej!");
                         b1 = 1; 
         
         #góra góra lewo
@@ -38,7 +40,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry góry, z lewej!");
+                        if(DEBUG): print("Auto od góry góry, z lewej!");
                         c1 = 1; 
         #góra prawo
         for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
@@ -46,7 +48,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry prawo!");
+                        if(DEBUG): print("Auto od góry prawo!");
                         e2 = 1;   
         
         #góra prawo prawo
@@ -55,7 +57,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry prawo prawo!");
+                        if(DEBUG): print("Auto od góry prawo prawo!");
                         f2 = 1;  
         
         #góra prawo prawo prawo
@@ -64,7 +66,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry prawo prawo prawo!");
+                        if(DEBUG): print("Auto od góry prawo prawo prawo!");
                         g2 = 1; 
     else:
          #góra lewo lewo lewo
@@ -73,7 +75,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry, z lewej lewej lewej!");
+                        if(DEBUG): print("Auto od góry, z lewej lewej lewej!");
                         a2 = 1; 
         
         #góra lewo lewo
@@ -82,7 +84,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry, z lewej lewej!");
+                        if(DEBUG): print("Auto od góry, z lewej lewej!");
                         b2 = 1; 
         
         #góra lewo
@@ -91,7 +93,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry, z lewej!");
+                        if(DEBUG): print("Auto od góry, z lewej!");
                         c2 = 1;  
         #góra góra prawo
         for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
@@ -99,7 +101,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry góry prawo!");
+                        if(DEBUG): print("Auto od góry góry prawo!");
                         e1 = 1;   
         
         #góra góra prawo prawo
@@ -108,7 +110,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry góry prawo prawo!");
+                        if(DEBUG): print("Auto od góry góry prawo prawo!");
                         f1 = 1;  
         
         #góra góra prawo prawo prawo
@@ -117,7 +119,7 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        print("Auto od góry góry prawo prawo prawo!");
+                        if(DEBUG): print("Auto od góry góry prawo prawo prawo!");
                         g1 = 1;
     
     #sprawdzenie dla wszystkich
@@ -127,7 +129,7 @@ def szukajaut(obs, pixel_x, pixel_y):
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                (obs[linijka][pixel]!=[232, 233,74]).all()):
-                    print("Auto od góry góry!");
+                    if(DEBUG): print("Auto od góry góry!");
                     d1 = 1;   
      
     #góra
@@ -136,7 +138,7 @@ def szukajaut(obs, pixel_x, pixel_y):
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                (obs[linijka][pixel]!=[232, 233,74]).all()):
-                    print("Auto od góry!");
+                    if(DEBUG): print("Auto od góry!");
                     d2 = 1;   
     
     return [a1, b1, c1, d1, e1, f1, g1, a2, b2, c2, d2, e2, f2, g2]; 
@@ -173,19 +175,34 @@ def run():
     # 8 + 1 + 8 = 19 szerokosc
     i = 0
     zabcia = zaba_agent.zaba_agent()
-    while(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
-        i+=1
-        if i % 6 <= 3:
-            zaba_x, zaba_y = znajdz_zabe(obs, zabcia);
-            action = zabcia.pobierz_akcje(env, szukajaut(obs, zaba_x, zaba_y));
-        else:
-            #konieczne, poniewaz symulujemy przyciski - jesli akcja sie powtorzy zostanie wykonanana tylko raz 
-            #mogloby to zaburzyc proces uczenia sie imo
-            action = 0
-        obs, reward, terminated, truncated, info = env.step(action)
- 
+    zabcie = []
 
-    env.close()
+    while(True):
+        if(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
+            i+=1
+            if i % 6 <= 3:
+                zaba_x, zaba_y = znajdz_zabe(obs, zabcia);
+                action = zabcia.pobierz_akcje(env, szukajaut(obs, zaba_x, zaba_y));
+            else:
+                #konieczne, poniewaz symulujemy przyciski - jesli akcja sie powtorzy zostanie wykonanana tylko raz 
+                #mogloby to zaburzyc proces uczenia sie imo
+                action = 0
+            obs, reward, terminated, truncated, info = env.step(action)
+        else:
+            print("Kolejna żaba zakonczyła żywot.")
+            zabcie.append(zabcia)
+            if(int(len(zabcie))>=10):
+                #dokonujemy selekcji
+                env.reset()
+                env.close() #z jakiegos powodu to nie zamyka samo :/
+                exit(0)
+            else:
+                print("Spawnuję "+str(len(zabcie)+1)+". żabę");
+                zabcia = zaba_agent.zaba_agent();
+                obs, info = env.reset()
+                terminated = False
+                truncated = False
+    
 
 if __name__ == '__main__':
     run()
