@@ -22,18 +22,18 @@ class zaba_agent:
         glosy_za = 0
         glosy_przeciw = 0
         for i in lista_aut:
-            if(lista_aut[i]==1):
+            if i==1:
                 glosy_za += self.Chances[i*2-1]
                 glosy_przeciw += self.Chances[i*2]
-        if(glosy_za>glosy_przeciw):
+        if glosy_za>glosy_przeciw:
             return 1
         else:
             return 0        
 
     def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska
-        krok = self.mozg_zaby(self, obserwacja)
+        krok = self.mozg_zaby(obserwacja)
 
-        return krok;
+        return krok
     
 
 # algorytm genetyczny:

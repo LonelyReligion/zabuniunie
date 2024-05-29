@@ -9,7 +9,7 @@ def szukajaut(obs, pixel_x, pixel_y):
     #1[][][][][][][]
     #2[][][][][][][]
     #3      X
-    a1 = b1 = c1 = d1 = e1 = f1 = g1 = a2 = b2 = c2 = d2 = e2 = f2 = g2 = 0;
+    a1 = b1 = c1 = d1 = e1 = f1 = g1 = a2 = b2 = c2 = d2 = e2 = f2 = g2 = 0
     
     slepota = 1
     if(pixel_y==161 or pixel_y==122):
@@ -22,8 +22,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry góry, z lewej lewej lewej!");
-                        a1 = 1; 
+                        if(DEBUG): print("Auto od góry góry, z lewej lewej lewej!")
+                        a1 = 1
         
         #góra góra lewo lewo
         for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
@@ -31,8 +31,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry góry, z lewej lewej!");
-                        b1 = 1; 
+                        if(DEBUG): print("Auto od góry góry, z lewej lewej!")
+                        b1 = 1
         
         #góra góra lewo
         for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
@@ -40,16 +40,16 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry góry, z lewej!");
-                        c1 = 1; 
+                        if(DEBUG): print("Auto od góry góry, z lewej!")
+                        c1 = 1
         #góra prawo
         for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
             for pixel in range(pixel_x+7, pixel_x+14): #szerokosc zaby
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry prawo!");
-                        e2 = 1;   
+                        if(DEBUG): print("Auto od góry prawo!")
+                        e2 = 1
         
         #góra prawo prawo
         for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
@@ -57,8 +57,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry prawo prawo!");
-                        f2 = 1;  
+                        if(DEBUG): print("Auto od góry prawo prawo!")
+                        f2 = 1
         
         #góra prawo prawo prawo
         for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
@@ -66,8 +66,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry prawo prawo prawo!");
-                        g2 = 1; 
+                        if(DEBUG): print("Auto od góry prawo prawo prawo!")
+                        g2 = 1
     else:
          #góra lewo lewo lewo
         for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
@@ -75,8 +75,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry, z lewej lewej lewej!");
-                        a2 = 1; 
+                        if(DEBUG): print("Auto od góry, z lewej lewej lewej!")
+                        a2 = 1 
         
         #góra lewo lewo
         for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
@@ -84,8 +84,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry, z lewej lewej!");
-                        b2 = 1; 
+                        if(DEBUG): print("Auto od góry, z lewej lewej!")
+                        b2 = 1
         
         #góra lewo
         for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
@@ -93,16 +93,16 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry, z lewej!");
-                        c2 = 1;  
+                        if(DEBUG): print("Auto od góry, z lewej!")
+                        c2 = 1 
         #góra góra prawo
         for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
             for pixel in range(pixel_x+7, pixel_x+14): #szerokosc zaby
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry góry prawo!");
-                        e1 = 1;   
+                        if(DEBUG): print("Auto od góry góry prawo!")
+                        e1 = 1 
         
         #góra góra prawo prawo
         for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
@@ -110,8 +110,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry góry prawo prawo!");
-                        f1 = 1;  
+                        if(DEBUG): print("Auto od góry góry prawo prawo!")
+                        f1 = 1 
         
         #góra góra prawo prawo prawo
         for linijka in range(pixel_y-14, pixel_y-7): #wysokosc zaby
@@ -119,8 +119,8 @@ def szukajaut(obs, pixel_x, pixel_y):
                 #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
                 if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                 (obs[linijka][pixel]!=[232, 233,74]).all()):
-                        if(DEBUG): print("Auto od góry góry prawo prawo prawo!");
-                        g1 = 1;
+                        if(DEBUG): print("Auto od góry góry prawo prawo prawo!")
+                        g1 = 1
     
     #sprawdzenie dla wszystkich
     #góra góra
@@ -129,8 +129,8 @@ def szukajaut(obs, pixel_x, pixel_y):
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                (obs[linijka][pixel]!=[232, 233,74]).all()):
-                    if(DEBUG): print("Auto od góry góry!");
-                    d1 = 1;   
+                    if(DEBUG): print("Auto od góry góry!")
+                    d1 = 1
      
     #góra
     for linijka in range(pixel_y-7, pixel_y): #wysokosc zaby
@@ -138,24 +138,24 @@ def szukajaut(obs, pixel_x, pixel_y):
             #nie musimy sprawdzac krawedzi bo mamy margines bezpieczenstwa z ramki!
             if((obs[linijka][pixel]!=[0, 0, 0]).all() and
                (obs[linijka][pixel]!=[232, 233,74]).all()):
-                    if(DEBUG): print("Auto od góry!");
-                    d2 = 1;   
+                    if(DEBUG): print("Auto od góry!")
+                    d2 = 1
     
     return [a1, b1, c1, d1, e1, f1, g1, a2, b2, c2, d2, e2, f2, g2]; 
 
 def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia lewa lapke!!!
     #idziemy od dołu?
-    pixel_x = 0;
-    pixel_y = 0;
+    pixel_x = 0
+    pixel_y = 0
 
     for linijka in obs:
-        pixel_x = 0;
+        pixel_x = 0
         for pixel in linijka:
             if((pixel==[110, 156, 66]).all()):
-                zaba.pozycjay = pixel_y;
-                return [pixel_x, pixel_y];
-            pixel_x+=1;
-        pixel_y+=1;
+                zaba.pozycjay = pixel_y
+                return [pixel_x, pixel_y]
+            pixel_x+=1
+        pixel_y+=1
 
 def run():
     env = gym.make("ALE/Frogger-v5", render_mode="human", obs_type="rgb")
@@ -181,11 +181,12 @@ def run():
         if(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
             i+=1
             if i % 6 <= 3:
-                zaba_x, zaba_y = znajdz_zabe(obs, zabcia);
-                action = zabcia.pobierz_akcje(env, szukajaut(obs, zaba_x, zaba_y));
+                zaba_x, zaba_y = znajdz_zabe(obs, zabcia)
+                action = zabcia.pobierz_akcje(env, szukajaut(obs, zaba_x, zaba_y))
             else:
                 #konieczne, poniewaz symulujemy przyciski - jesli akcja sie powtorzy zostanie wykonanana tylko raz 
                 #mogloby to zaburzyc proces uczenia sie imo
+                
                 action = 0
             obs, reward, terminated, truncated, info = env.step(action)
         else:
@@ -197,8 +198,8 @@ def run():
                 env.close() #z jakiegos powodu to nie zamyka samo :/
                 exit(0)
             else:
-                print("Spawnuję "+str(len(zabcie)+1)+". żabę");
-                zabcia = zaba_agent.zaba_agent();
+                print("Spawnuję "+str(len(zabcie)+1)+". żabę")
+                zabcia = zaba_agent.zaba_agent()
                 obs, info = env.reset()
                 terminated = False
                 truncated = False
