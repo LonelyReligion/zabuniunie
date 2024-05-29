@@ -21,8 +21,8 @@ class zaba_agent:
     def mozg_zaby(self, lista_aut):
         glosy_za = 0
         glosy_przeciw = 0
-        for i in lista_aut:
-            if i==1:
+        for i, val in enumerate(lista_aut):
+            if val==1:
                 glosy_za += self.Chances[i*2-1]
                 glosy_przeciw += self.Chances[i*2]
         if glosy_za>glosy_przeciw:
