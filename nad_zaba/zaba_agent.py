@@ -17,23 +17,21 @@ class zaba_agent:
     ):
         self.Chances = Chances #konwencja, const
         self.pozycjay = 0 #fitness
+         
 
-    def mozg_zaby(self, lista_aut):
+    def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska
         glosy_za = 0
         glosy_przeciw = 0
-        for i, val in enumerate(lista_aut):
+        for i, val in enumerate(obserwacja):
+            #print("indeks: " + str(i) + " wartosc: " + str(val))
             if val==1:
-                glosy_za += self.Chances[i*2-1]
-                glosy_przeciw += self.Chances[i*2]
+                glosy_za += self.Chances[i*2]
+                glosy_przeciw += self.Chances[i*2+1]
+        print(str(glosy_za)+"/"+str(glosy_przeciw))
         if glosy_za>glosy_przeciw:
             return 1
         else:
-            return 0        
-
-    def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska
-        krok = self.mozg_zaby(obserwacja)
-
-        return krok
+            return 0  
     
 
 # algorytm genetyczny:
