@@ -1,6 +1,8 @@
 import gymnasium as gym
 import numpy as np #moze do generowania seeda?
 import zaba_agent
+import random
+import pickle
 
 DEBUG = False
 
@@ -161,11 +163,21 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
 def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
     new_population = []
     
-    zaby = sorted(zaby, key=lambda x: x.oblicz_fitness(), reverse=True) # Sortujemy żab według fitness w malejącej kolejności
+    zaby = sorted(zaby, key=lambda x: x.pozycjay, reverse=True) # Sortujemy żab według fitness w malejącej kolejności
     
    
     top_zaby = zaby[:4] # Narazie top 4 najlepszych 
-    
+    nad_zaba = zaby[0]
+
+    open("filename", "w").close()
+    # Zapisujemy zabki do pliku
+    with open('nadzaba.pkl', 'wb') as file:
+        pickle.dump(nad_zaba, file)
+
+    # sprawdzenie, tak bedziemy ja wczytywac na prezentacji
+    with open('nadzaba.pkl', 'rb') as file:
+        odczytana_zaba = pickle.load(file)
+
     # Tworzenie nowych żab poprzez mieszanie genów
     for i in range(len(top_zaby)):
         for j in range(i+1, len(top_zaby)):
@@ -174,11 +186,13 @@ def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
             
             new_genes = (parent1.Chances + parent2.Chances) / 2 #Srednia z genów rodzicow
             
+            if(random.random() >= 0.9): #10% szansa float
+                new_genes[random.randrange(27)] += 0.1; #0 do 27  int
+            
+            new_genes = new_genes/sum(new_genes) # I trzeba moze znormalizować dane
             # Mozemy tu stworzyc jakas mutacje genow lub utworzyc do tego inna funkcje ale nie wiem co ile zab powinnysmy cos mutowac
-            # I trzeba moze znormalizować dane
-
             # Tworzenie nowej żaby z nowymi genami
-            new_zaba = zaba_agent()
+            new_zaba = zaba_agent.zaba_agent()
             new_zaba.Chances = new_genes
             new_population.append(new_zaba)
     
@@ -203,12 +217,14 @@ def run():
     i = 0
     zabcia = zaba_agent.zaba_agent()
     zabcie = []
+    nowe_lepsze_zabcie = []
 
     while(True):
+        zaba_x, zaba_y = znajdz_zabe(obs, zabcia)
+        zabcia.ustaw_fitness(zaba_y);
         if(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
             i+=1
             if i % 6 <= 3:
-                zaba_x, zaba_y = znajdz_zabe(obs, zabcia)
                 action = zabcia.pobierz_akcje(env, szukajaut(obs, zaba_x, zaba_y))
             else:
                 #konieczne, poniewaz symulujemy przyciski - jesli akcja sie powtorzy zostanie wykonanana tylko raz 
@@ -217,27 +233,24 @@ def run():
                 action = 0
             obs, reward, terminated, truncated, info = env.step(action)
         else:
-
-            zabcia.ustaw_fitness(zaba_y)
-            print(f"Kolejna żaba zakończyła żywot na poziomie {zabcia.oblicz_fitness()}.")
-
-            #print("Kolejna żaba zakonczyła żywot.")
+            print(f"Kolejna żaba zakończyła żywot. Fitness: {zabcia.pozycjay}.")
 
             zabcie.append(zabcia)
             if(int(len(zabcie))>=10):
                 
                 #dokonujemy selekcji
                 nowe_lepsze_zabcie = crossover(zabcie, mutation_rate=0.1, mutation_scale=0.05) #tworzymy tablice z nowymi lepszymi 5 zabciami
-
-                env.reset()
-                env.close() #z jakiegos powodu to nie zamyka samo :/
-                exit(0)
+                zabcie = [];
             else:
                 print("Spawnuję "+str(len(zabcie)+1)+". żabę")
-                zabcia = zaba_agent.zaba_agent()
-                obs, info = env.reset()
-                terminated = False
-                truncated = False
+                if(len(nowe_lepsze_zabcie) != 0):
+                    zabcia = nowe_lepsze_zabcie[len(zabcie)];
+                else:
+                    zabcia = zaba_agent.zaba_agent()
+
+            obs, info = env.reset()
+            terminated = False
+            truncated = False
     
 
 if __name__ == '__main__':

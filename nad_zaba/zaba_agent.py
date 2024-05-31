@@ -13,10 +13,14 @@ class zaba_agent:
         #wartości domyślne dla sierot - losowe
         #:= pozwala na przypisywanie wartości w wyrażeniach!
         #aktualizacja 21.05: Dirichlet distribution
-        Chances = sum(np.random.dirichlet(np.ones(28),size=1))
+        Chances = -1
     ):
-        self.Chances = Chances #konwencja, const
+        if(Chances == -1):
+            self.Chances = sum(np.random.dirichlet(np.ones(28),size=1))
+        else:
+            self.Chances = Chances #konwencja, const
         self.pozycjay = 0 #fitness
+        print(self.Chances);
          
 
     def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska
@@ -28,18 +32,16 @@ class zaba_agent:
                 glosy_za += self.Chances[i*2]
                 glosy_przeciw += self.Chances[i*2+1]
 
-        print(str(glosy_za)+"/"+str(glosy_przeciw))
+        #print(str(glosy_za)+"/"+str(glosy_przeciw))
 
-        if glosy_za>glosy_przeciw:
+        if glosy_za >= glosy_przeciw:
             return 1
         else:
             return 0  
-        
-    def oblicz_fitness(self):
-        return self.pozycjay
     
     def ustaw_fitness(self, pozycjay):
-        self.pozycjay = pozycjay
+        if(self.pozycjay < pozycjay):
+            self.pozycjay = pozycjay
     
 
 # algorytm genetyczny:
