@@ -1,5 +1,5 @@
 import gymnasium as gym
-import numpy #moze do generowania seeda?
+import numpy as np #moze do generowania seeda?
 import zaba_agent
 
 DEBUG = False
@@ -157,6 +157,33 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
             pixel_x+=1
         pixel_y+=1
 
+
+def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
+    new_population = []
+    
+    zaby = sorted(zaby, key=lambda x: x.oblicz_fitness(), reverse=True) # Sortujemy żab według fitness w malejącej kolejności
+    
+   
+    top_zaby = zaby[:4] # Narazie top 4 najlepszych 
+    
+    # Tworzenie nowych żab poprzez mieszanie genów
+    for i in range(len(top_zaby)):
+        for j in range(i+1, len(top_zaby)):
+            parent1 = top_zaby[i]
+            parent2 = top_zaby[j]
+            
+            new_genes = (parent1.Chances + parent2.Chances) / 2 #Srednia z genów rodzicow
+            
+            # Mozemy tu stworzyc jakas mutacje genow lub utworzyc do tego inna funkcje ale nie wiem co ile zab powinnysmy cos mutowac
+            # I trzeba moze znormalizować dane
+
+            # Tworzenie nowej żaby z nowymi genami
+            new_zaba = zaba_agent()
+            new_zaba.Chances = new_genes
+            new_population.append(new_zaba)
+    
+    return new_population
+
 def run():
     env = gym.make("ALE/Frogger-v5", render_mode="human", obs_type="rgb")
     #render_module: human, rgb_array, ansi, rgb_array_list, ansi_list 
@@ -190,10 +217,18 @@ def run():
                 action = 0
             obs, reward, terminated, truncated, info = env.step(action)
         else:
-            print("Kolejna żaba zakonczyła żywot.")
+
+            zabcia.ustaw_fitness(zaba_y)
+            print(f"Kolejna żaba zakończyła żywot na poziomie {zabcia.oblicz_fitness()}.")
+
+            #print("Kolejna żaba zakonczyła żywot.")
+
             zabcie.append(zabcia)
             if(int(len(zabcie))>=10):
+                
                 #dokonujemy selekcji
+                nowe_lepsze_zabcie = crossover(zabcie, mutation_rate=0.1, mutation_scale=0.05) #tworzymy tablice z nowymi lepszymi 5 zabciami
+
                 env.reset()
                 env.close() #z jakiegos powodu to nie zamyka samo :/
                 exit(0)

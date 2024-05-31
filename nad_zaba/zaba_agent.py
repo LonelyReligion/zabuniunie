@@ -27,11 +27,19 @@ class zaba_agent:
             if val==1:
                 glosy_za += self.Chances[i*2]
                 glosy_przeciw += self.Chances[i*2+1]
+
         print(str(glosy_za)+"/"+str(glosy_przeciw))
+
         if glosy_za>glosy_przeciw:
             return 1
         else:
             return 0  
+        
+    def oblicz_fitness(self):
+        return self.pozycjay
+    
+    def ustaw_fitness(self, pozycjay):
+        self.pozycjay = pozycjay
     
 
 # algorytm genetyczny:
