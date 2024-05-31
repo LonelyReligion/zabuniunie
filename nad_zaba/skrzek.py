@@ -178,7 +178,7 @@ def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
             # I trzeba moze znormalizować dane
 
             # Tworzenie nowej żaby z nowymi genami
-            new_zaba = zaba_agent.zaba_agent()
+            new_zaba = zaba_agent()
             new_zaba.Chances = new_genes
             new_population.append(new_zaba)
     
@@ -228,7 +228,6 @@ def run():
                 
                 #dokonujemy selekcji
                 nowe_lepsze_zabcie = crossover(zabcie, mutation_rate=0.1, mutation_scale=0.05) #tworzymy tablice z nowymi lepszymi 5 zabciami
-                
 
                 env.reset()
                 env.close() #z jakiegos powodu to nie zamyka samo :/
