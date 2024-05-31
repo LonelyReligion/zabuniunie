@@ -30,7 +30,7 @@ class zaba_agent:
 
         print(str(glosy_za)+"/"+str(glosy_przeciw))
 
-        if glosy_za>glosy_przeciw:
+        if glosy_za>=glosy_przeciw:
             return 1
         else:
             return 0  
