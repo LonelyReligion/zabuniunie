@@ -5,6 +5,7 @@ import random
 import pickle
 
 DEBUG = False
+WCZYTUJEMY = True
 
 def szukajaut(obs, pixel_x, pixel_y):
     # a b c d e f g 
@@ -169,34 +170,32 @@ def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
     top_zaby = zaby[:4] # Narazie top 4 najlepszych 
     nad_zaba = zaby[0]
 
-    open("filename", "w").close()
+    open("nadzaba.pkl", "w").close()
     # Zapisujemy zabki do pliku
     with open('nadzaba.pkl', 'wb') as file:
         pickle.dump(nad_zaba, file)
 
-    # sprawdzenie, tak bedziemy ja wczytywac na prezentacji
-    with open('nadzaba.pkl', 'rb') as file:
-        odczytana_zaba = pickle.load(file)
-
     # Tworzenie nowych żab poprzez mieszanie genów
     for i in range(len(top_zaby)):
-        for j in range(i+1, len(top_zaby)):
-            parent1 = top_zaby[i]
-            parent2 = top_zaby[j]
-            
-            new_genes = (parent1.Chances + parent2.Chances) / 2 #Srednia z genów rodzicow
-            
-            if(random.random() >= 0.9): #10% szansa float
-                new_genes[random.randrange(27)] += 0.1; #0 do 27  int
-            
-            new_genes = new_genes/sum(new_genes) # I trzeba moze znormalizować dane
-            # Mozemy tu stworzyc jakas mutacje genow lub utworzyc do tego inna funkcje ale nie wiem co ile zab powinnysmy cos mutowac
-            # Tworzenie nowej żaby z nowymi genami
-            new_zaba = zaba_agent.zaba_agent()
-            new_zaba.Chances = new_genes
-            new_population.append(new_zaba)
+        for j in range(len(top_zaby)):
+            if(len(new_population)>=10):
+                return new_population
+            if(i != j):
+                parent1 = top_zaby[i]
+                parent2 = top_zaby[j]
+                
+                new_genes = (parent1.Chances + parent2.Chances) / 2 #Srednia z genów rodzicow
+                
+                if(random.random() >= 0.9): #10% szansa float
+                    new_genes[random.randrange(27)] += 0.1; #0 do 27  int
+                
+                new_genes = new_genes/sum(new_genes) # I trzeba moze znormalizować dane
+                # Mozemy tu stworzyc jakas mutacje genow lub utworzyc do tego inna funkcje ale nie wiem co ile zab powinnysmy cos mutowac
+                # Tworzenie nowej żaby z nowymi genami
+                new_zaba = zaba_agent.zaba_agent()
+                new_zaba.Chances = new_genes
+                new_population.append(new_zaba)
     
-    return new_population
 
 def run():
     env = gym.make("ALE/Frogger-v5", render_mode="human", obs_type="rgb")
@@ -215,7 +214,13 @@ def run():
     # 13 wysokosc
     # 8 + 1 + 8 = 19 szerokosc
     i = 0
-    zabcia = zaba_agent.zaba_agent()
+
+    if(WCZYTUJEMY):
+             # sprawdzenie, tak bedziemy ja wczytywac na prezentacji
+        with open('nadzaba.pkl', 'rb') as file:
+            zabcia = pickle.load(file)
+    else:
+        zabcia = zaba_agent.zaba_agent()
     zabcie = []
     nowe_lepsze_zabcie = []
 
@@ -234,7 +239,10 @@ def run():
             obs, reward, terminated, truncated, info = env.step(action)
         else:
             print(f"Kolejna żaba zakończyła żywot. Fitness: {zabcia.pozycjay}.")
-
+            if(WCZYTUJEMY):
+                env.reset()
+                env.close()
+                exit(0)
             zabcie.append(zabcia)
             if(int(len(zabcie))>=10):
                 
