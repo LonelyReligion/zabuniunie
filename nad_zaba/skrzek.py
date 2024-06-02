@@ -5,7 +5,7 @@ import random
 import pickle
 
 DEBUG = False
-WCZYTUJEMY = True
+WCZYTUJEMY = False
 
 def szukajaut(obs, pixel_x, pixel_y):
     # a b c d e f g 
@@ -159,7 +159,6 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
                 return [pixel_x, pixel_y]
             pixel_x+=1
         pixel_y+=1
-
 
 def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
     new_population = []
