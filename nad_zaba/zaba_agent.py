@@ -40,7 +40,7 @@ class zaba_agent:
             return 0  
     
     def ustaw_fitness(self, pozycjay):
-        if(self.pozycjay < pozycjay):
+        if(self.pozycjay > pozycjay):
             self.pozycjay = pozycjay
     
 
