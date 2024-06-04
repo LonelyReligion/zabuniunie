@@ -155,7 +155,6 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
         pixel_x = 0
         for pixel in linijka:
             if((pixel==[110, 156, 66]).all()):
-                zaba.pozycjay = pixel_y
                 return [pixel_x, pixel_y]
             pixel_x+=1
         pixel_y+=1

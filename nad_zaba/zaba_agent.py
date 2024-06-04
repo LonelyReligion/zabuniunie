@@ -19,7 +19,7 @@ class zaba_agent:
             self.Chances = sum(np.random.dirichlet(np.ones(28),size=1))
         else:
             self.Chances = Chances #konwencja, const
-        self.pozycjay = 0 #fitness
+        self.pozycjay = 171 #fitness
         print(self.Chances);
          
 
@@ -40,7 +40,9 @@ class zaba_agent:
             return 0  
     
     def ustaw_fitness(self, pozycjay):
+        #print (str(self.pozycjay)+"/"+str(pozycjay))
         if(self.pozycjay > pozycjay):
+            #print("zmiana")
             self.pozycjay = pozycjay
     
 
