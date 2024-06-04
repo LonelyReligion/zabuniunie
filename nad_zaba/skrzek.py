@@ -148,6 +148,7 @@ def szukajaut(obs, pixel_x, pixel_y):
 
 def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia lewa lapke!!!
     #idziemy od dołu?
+    #bug: czasami zwraca 14
     pixel_x = 0
     pixel_y = 0
 
@@ -162,37 +163,57 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
 def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
     new_population = []
     
+    #wybieranie najlepszej zaby
     zaby = sorted(zaby, key=lambda x: x.pozycjay, reverse=True) # Sortujemy żab według fitness w malejącej kolejności
-    
-   
-    top_zaby = zaby[:4] # Narazie top 4 najlepszych 
     nad_zaba = zaby[0]
-
     open("nadzaba.pkl", "w").close()
     # Zapisujemy zabki do pliku
     with open('nadzaba.pkl', 'wb') as file:
         pickle.dump(nad_zaba, file)
 
-    # Tworzenie nowych żab poprzez mieszanie genów
-    for i in range(len(top_zaby)):
-        for j in range(len(top_zaby)):
-            if(len(new_population)>=10):
-                return new_population
-            if(i != j):
-                parent1 = top_zaby[i]
-                parent2 = top_zaby[j]
-                
-                new_genes = (parent1.Chances + parent2.Chances) / 2 #Srednia z genów rodzicow
-                
-                if(random.random() >= 0.9): #10% szansa float
-                    new_genes[random.randrange(27)] += 0.1; #0 do 27  int
-                
-                new_genes = new_genes/sum(new_genes) # I trzeba moze znormalizować dane
-                # Mozemy tu stworzyc jakas mutacje genow lub utworzyc do tego inna funkcje ale nie wiem co ile zab powinnysmy cos mutowac
-                # Tworzenie nowej żaby z nowymi genami
-                new_zaba = zaba_agent.zaba_agent()
-                new_zaba.Chances = new_genes
-                new_population.append(new_zaba)
+    #selekcja zab do rozrodu - selekcja ruletkowa
+    ruletka=[]
+    for zaba in zaby:
+        if(zaba.pozycjay == 161):
+             ruletka.append(zaba) #raz
+        elif(zaba.pozycjay == 148):
+            ruletka.append(zaba) #dwa
+            ruletka.append(zaba) 
+        elif(zaba.pozycjay == 135):
+             ruletka.append(zaba) #trzy
+             ruletka.append(zaba) 
+             ruletka.append(zaba) 
+        elif(zaba.pozycjay == 122):
+             for i in range(4):
+                ruletka.append(zaba) #cztery
+        elif(zaba.pozycjay == 109):
+             for i in range(5):
+                ruletka.append(zaba) #piec
+        else:
+             for i in range(6):
+                ruletka.append(zaba) #szesc
+
+    #krzyzowanie
+    for i in range(20):
+        rodzic = ruletka[random.randint(0, len(ruletka)-1)]
+        rodzic_ale_fajniejszy = ruletka[random.randint(0, len(ruletka)-1)]
+        
+        granica = random.randint(0, len(rodzic.Chances))
+        
+        new_genes = []
+        
+        new_genes.extend(rodzic.Chances[:granica])
+        new_genes.extend(rodzic_ale_fajniejszy.Chances[granica:])
+
+        #mutacja
+        for gen in new_genes:
+             if(random.random() >= 0.95):
+                  gen*random.uniform(0.75, 1.25)
+        new_genes = new_genes/sum(new_genes) #normalizacja
+        new_zaba = zaba_agent.zaba_agent()
+        new_zaba.Chances = new_genes
+        new_population.append(new_zaba)
+    return new_population        
     
 
 def run():
@@ -248,8 +269,7 @@ def run():
                 env.close()
                 exit(0)
             zabcie.append(zabcia)
-            if(int(len(zabcie))>=10):
-                
+            if(int(len(zabcie))>=20):
                 #dokonujemy selekcji
                 nowe_lepsze_zabcie = crossover(zabcie, mutation_rate=0.1, mutation_scale=0.05) #tworzymy tablice z nowymi lepszymi 5 zabciami
                 zabcie = [];
