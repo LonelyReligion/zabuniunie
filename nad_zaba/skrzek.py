@@ -225,7 +225,12 @@ def run():
 
     while(True):
         zaba_x, zaba_y = znajdz_zabe(obs, zabcia)
+<<<<<<< Updated upstream
         zabcia.ustaw_fitness(zaba_y)
+=======
+        #print(zaba_y);
+        zabcia.ustaw_fitness(zaba_y);
+>>>>>>> Stashed changes
         if(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
             i+=1
             if i % 6 <= 3:
