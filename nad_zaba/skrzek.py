@@ -212,6 +212,7 @@ def run():
     # 13 wysokosc
     # 8 + 1 + 8 = 19 szerokosc
     i = 0
+    pokolenie = 1
 
     if(WCZYTUJEMY):
              # sprawdzenie, tak bedziemy ja wczytywac na prezentacji
@@ -224,7 +225,7 @@ def run():
 
     while(True):
         zaba_x, zaba_y = znajdz_zabe(obs, zabcia)
-        zabcia.ustaw_fitness(zaba_y);
+        zabcia.ustaw_fitness(zaba_y)
         if(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
             i+=1
             if i % 6 <= 3:
@@ -247,6 +248,8 @@ def run():
                 #dokonujemy selekcji
                 nowe_lepsze_zabcie = crossover(zabcie, mutation_rate=0.1, mutation_scale=0.05) #tworzymy tablice z nowymi lepszymi 5 zabciami
                 zabcie = [];
+                pokolenie=pokolenie+1
+                print("Pokolenie "+ str(pokolenie) + ". ")
             else:
                 print("Spawnuję "+str(len(zabcie)+1)+". żabę")
                 if(len(nowe_lepsze_zabcie) != 0):
