@@ -20,7 +20,7 @@ class zaba_agent:
         else:
             self.Chances = Chances #konwencja, const
         self.pozycjay = 171 #fitness
-        print(self.Chances);
+        #print(self.Chances);
          
 
     def pobierz_akcje(self, env, obserwacja): #co robimy + informacje ze srodowiska

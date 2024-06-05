@@ -166,6 +166,7 @@ def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
     #wybieranie najlepszej zaby
     zaby = sorted(zaby, key=lambda x: x.pozycjay, reverse=True) # Sortujemy żab według fitness w malejącej kolejności
     nad_zaba = zaby[0]
+    print(str(nad_zaba.pozycjay))
     open("nadzaba.pkl", "w").close()
     # Zapisujemy zabki do pliku
     with open('nadzaba.pkl', 'wb') as file:
