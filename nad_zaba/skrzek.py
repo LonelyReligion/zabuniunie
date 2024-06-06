@@ -5,7 +5,7 @@ import random
 import pickle
 
 DEBUG = False
-WCZYTUJEMY = False
+WCZYTUJEMY = True
 
 def szukajaut(obs, pixel_x, pixel_y):
     # a b c d e f g 
