@@ -5,7 +5,7 @@ import random
 import pickle
 
 DEBUG = False
-WCZYTUJEMY = True
+WCZYTUJEMY = False
 
 def szukajaut(obs, pixel_x, pixel_y):
     # a b c d e f g 
@@ -197,7 +197,7 @@ def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
                 ruletka.append(zaba) #szesc
 
     #krzyzowanie
-    for i in range(20):
+    for i in range(5):
         rodzic = ruletka[random.randint(0, len(ruletka)-1)]
         rodzic_ale_fajniejszy = ruletka[random.randint(0, len(ruletka)-1)]
         
@@ -272,7 +272,7 @@ def run():
                 env.close()
                 exit(0)
             zabcie.append(zabcia)
-            if(int(len(zabcie))>=20):
+            if(int(len(zabcie))>=5):
                 #dokonujemy selekcji
                 nowe_lepsze_zabcie = crossover(zabcie, mutation_rate=0.1, mutation_scale=0.05) #tworzymy tablice z nowymi lepszymi 5 zabciami
                 zabcie = [];
