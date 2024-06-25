@@ -5,7 +5,7 @@ import random
 import pickle
 
 DEBUG = False
-WCZYTUJEMY = False
+WCZYTUJEMY = True
 
 def szukajaut(obs, pixel_x, pixel_y):
     # a b c d e f g 
@@ -150,9 +150,9 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
     #idziemy od dołu?
     #bug: czasami zwraca 14
     pixel_x = 0
-    pixel_y = 0
+    pixel_y = 50
 
-    for linijka in obs:
+    for linijka in obs[50:]:
         pixel_x = 0
         for pixel in linijka:
             if((pixel==[110, 156, 66]).all()):
@@ -160,7 +160,7 @@ def znajdz_zabe(obs, zaba):  #optymalizacja: w pixel_x i pixel_y mamy przednia l
             pixel_x+=1
         pixel_y+=1
 
-def crossover(zaby, mutation_rate=0.1, mutation_scale=0.05):
+def crossover(zaby):
     new_population = []
     
     #wybieranie najlepszej zaby
@@ -253,7 +253,7 @@ def run():
         zabcia.ustaw_fitness(zaba_y)
 
         #print(zaba_y);
-        zabcia.ustaw_fitness(zaba_y);
+        zabcia.ustaw_fitness(zaba_y)
 
         if(not terminated and not truncated): #na potrzeby testu, jedna zaba do smierci lub znudzenia;)
             i+=1
@@ -274,14 +274,14 @@ def run():
             zabcie.append(zabcia)
             if(int(len(zabcie))>=5):
                 #dokonujemy selekcji
-                nowe_lepsze_zabcie = crossover(zabcie, mutation_rate=0.1, mutation_scale=0.05) #tworzymy tablice z nowymi lepszymi 5 zabciami
-                zabcie = [];
+                nowe_lepsze_zabcie = crossover(zabcie) #tworzymy tablice z nowymi lepszymi 5 zabciami
+                zabcie = []
                 pokolenie=pokolenie+1
                 print("Pokolenie "+ str(pokolenie) + ". ")
             else:
                 print("Spawnuję "+str(len(zabcie)+1)+". żabę")
                 if(len(nowe_lepsze_zabcie) != 0):
-                    zabcia = nowe_lepsze_zabcie[len(zabcie)];
+                    zabcia = nowe_lepsze_zabcie[len(zabcie)]
                 else:
                     zabcia = zaba_agent.zaba_agent()
 
@@ -292,3 +292,4 @@ def run():
 
 if __name__ == '__main__':
     run()
+
