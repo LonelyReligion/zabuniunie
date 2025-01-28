@@ -1,1 +1,1 @@
-Algorytm genetyczny uczący się grać we froggera.
+Algorytm genetyczny uczący się grać we froggera w środowisku gymnasium. Wykonany we współpracy z @Kasia1092 https://github.com/Kasia1092 w ramach przedmiotu Biologically inspired artificial intelligence.
