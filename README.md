@@ -1,2 +1,1 @@
-wip
-Zabki Froggery
+Algorytm genetyczny uczący się grać we froggera.
